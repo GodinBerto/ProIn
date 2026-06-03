@@ -17,6 +17,7 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
+builder.Services.AddSingleton<AppDatabase>();
 builder.Services.AddSingleton<WorkerStatusStore>();
 
 var app = builder.Build();

@@ -46,3 +46,12 @@ C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\ProIn.Back
 C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\ProIn.Backend.runtimeconfig.json
 C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\ProIn.Backend.dll
 C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\ProIn.Backend.pdb
+C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\appsettings.Development.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\appsettings.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\package.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\ProIn.Backend.staticwebassets.endpoints.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\ProIn.Backend.exe
+C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\ProIn.Backend.deps.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\ProIn.Backend.runtimeconfig.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\ProIn.Backend.dll
+C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\ProIn.Backend.pdb

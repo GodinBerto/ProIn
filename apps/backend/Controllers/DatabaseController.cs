@@ -5,17 +5,13 @@ using Npgsql;
 
 [Route("api/database")]
 public sealed class DatabaseController(
-    IConfiguration configuration,
+    AppDatabase database,
     ILogger<DatabaseController> logger) : ApiControllerBase
 {
     [HttpGet("health", Name = "GetDatabaseHealth")]
     public async Task<ActionResult<DatabaseHealthResponse>> GetHealth(CancellationToken cancellationToken)
     {
-        var connectionString =
-            configuration.GetConnectionString("DefaultConnection")
-            ?? configuration["DATABASE_URL"];
-
-        if (string.IsNullOrWhiteSpace(connectionString))
+        if (!database.IsConfigured)
         {
             return Ok(new DatabaseHealthResponse(
                 "not_configured",
@@ -25,8 +21,7 @@ public sealed class DatabaseController(
 
         try
         {
-            await using var connection = new NpgsqlConnection(connectionString);
-            await connection.OpenAsync(cancellationToken);
+            await using var connection = await database.OpenConnectionAsync(cancellationToken);
 
             await using var command = new NpgsqlCommand(
                 "select current_database(), current_schema()",

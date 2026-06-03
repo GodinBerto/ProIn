@@ -7,4 +7,6 @@ public sealed record DatabaseHealthResponse(
     DateTimeOffset TimestampUtc,
     string Detail);
 
+public sealed record DatabaseErrorResponse(string Message);
+
 public sealed record WorkerHeartbeatRequest(string WorkerName);

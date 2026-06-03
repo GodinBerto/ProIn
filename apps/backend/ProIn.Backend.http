@@ -23,3 +23,23 @@ Content-Type: application/json
 }
 
 ###
+
+GET {{ProIn.Backend_HostAddress}}/api/profiles
+Accept: application/json
+
+###
+
+GET {{ProIn.Backend_HostAddress}}/api/organizations
+Accept: application/json
+
+###
+
+GET {{ProIn.Backend_HostAddress}}/api/documents
+Accept: application/json
+
+###
+
+GET {{ProIn.Backend_HostAddress}}/api/messages
+Accept: application/json
+
+###
