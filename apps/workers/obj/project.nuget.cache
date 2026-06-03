@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zU/BODevw9M=",
+  "dgSpecHash": "Lfqcu3A2zFQ=",
   "success": true,
-  "projectFilePath": "e:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\ProIn.Workers.csproj",
+  "projectFilePath": "E:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\ProIn.Workers.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\godfr\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.8\\microsoft.extensions.configuration.10.0.8.nupkg.sha512",
     "C:\\Users\\godfr\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.8\\microsoft.extensions.configuration.abstractions.10.0.8.nupkg.sha512",

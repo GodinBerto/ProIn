@@ -1,8 +1,10 @@
 {
-  "name": "proin-backend",
+  "name": "@proin/backend",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "dotnet watch --project ProIn.Backend.csproj run",
-    "build": "dotnet build ProIn.Backend.csproj"
+    "dev": ".\\.venv\\Scripts\\python.exe manage.py runserver 5236",
+    "build": "echo 'No build required for Django'",
+    "start": ".\\.venv\\Scripts\\python.exe manage.py runserver 5236"
   }
 }

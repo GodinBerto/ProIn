@@ -1,8 +1,0 @@
-{
-  "name": "proin-backend",
-  "private": true,
-  "scripts": {
-    "dev": "dotnet watch --project ProIn.Backend.csproj run",
-    "build": "dotnet build ProIn.Backend.csproj"
-  }
-}

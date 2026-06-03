@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "e:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\ProIn.Workers.csproj": {}
+    "E:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\ProIn.Workers.csproj": {}
   },
   "projects": {
-    "e:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\ProIn.Workers.csproj": {
+    "E:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\ProIn.Workers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\ProIn.Workers.csproj",
+        "projectUniqueName": "E:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\ProIn.Workers.csproj",
         "projectName": "ProIn.Workers",
-        "projectPath": "e:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\ProIn.Workers.csproj",
+        "projectPath": "E:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\ProIn.Workers.csproj",
         "packagesPath": "C:\\Users\\godfr\\.nuget\\packages\\",
-        "outputPath": "e:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\obj\\",
+        "outputPath": "E:\\Projects\\MonoRepo Applications\\ProIn\\apps\\workers\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\godfr\\AppData\\Roaming\\NuGet\\NuGet.Config"
