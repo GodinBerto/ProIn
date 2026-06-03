@@ -34,3 +34,15 @@ E:\Projects\MonoRepo Applications\ProIn\apps\backend\obj\Debug\net10.0\ref\ProIn
 E:\Projects\MonoRepo Applications\ProIn\apps\backend\bin\Debug\net10.0\package.json
 E:\Projects\MonoRepo Applications\ProIn\apps\backend\bin\Debug\net10.0\Npgsql.dll
 E:\Projects\MonoRepo Applications\ProIn\apps\backend\obj\Debug\net10.0\ProIn.Backend.sourcelink.json
+E:\Projects\MonoRepo Applications\ProIn\apps\backend\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\Projects\MonoRepo Applications\ProIn\apps\backend\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\Projects\MonoRepo Applications\ProIn\apps\backend\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\appsettings.Development.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\appsettings.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\package.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\ProIn.Backend.staticwebassets.endpoints.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\ProIn.Backend.exe
+C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\ProIn.Backend.deps.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\ProIn.Backend.runtimeconfig.json
+C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\ProIn.Backend.dll
+C:\Users\godfr\AppData\Local\Temp\proin-backend-swagger-verify-output\ProIn.Backend.pdb
