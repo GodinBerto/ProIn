@@ -32,3 +32,5 @@ E:\Projects\MonoRepo Applications\ProIn\apps\backend\obj\Debug\net10.0\ProIn.Bac
 E:\Projects\MonoRepo Applications\ProIn\apps\backend\obj\Debug\net10.0\ProIn.Backend.genruntimeconfig.cache
 E:\Projects\MonoRepo Applications\ProIn\apps\backend\obj\Debug\net10.0\ref\ProIn.Backend.dll
 E:\Projects\MonoRepo Applications\ProIn\apps\backend\bin\Debug\net10.0\package.json
+E:\Projects\MonoRepo Applications\ProIn\apps\backend\bin\Debug\net10.0\Npgsql.dll
+E:\Projects\MonoRepo Applications\ProIn\apps\backend\obj\Debug\net10.0\ProIn.Backend.sourcelink.json

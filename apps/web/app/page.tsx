@@ -17,9 +17,16 @@ type WorkerStatusResponse = {
   workers: WorkerStatusItem[];
 };
 
+type DatabaseHealthResponse = {
+  status: string;
+  timestampUtc: string;
+  detail: string;
+};
+
 type BackendSnapshot = {
   apiBaseUrl: string;
   health: HealthResponse | null;
+  databaseHealth: DatabaseHealthResponse | null;
   workerStatus: WorkerStatusResponse | null;
   error: string | null;
 };
@@ -41,14 +48,16 @@ async function fetchJson<T>(path: string): Promise<T> {
 
 async function loadBackendSnapshot(): Promise<BackendSnapshot> {
   try {
-    const [health, workerStatus] = await Promise.all([
+    const [health, databaseHealth, workerStatus] = await Promise.all([
       fetchJson<HealthResponse>("/api/health"),
+      fetchJson<DatabaseHealthResponse>("/api/database/health"),
       fetchJson<WorkerStatusResponse>("/api/workers/status"),
     ]);
 
     return {
       apiBaseUrl: backendBaseUrl,
       health,
+      databaseHealth,
       workerStatus,
       error: null,
     };
@@ -56,6 +65,7 @@ async function loadBackendSnapshot(): Promise<BackendSnapshot> {
     return {
       apiBaseUrl: backendBaseUrl,
       health: null,
+      databaseHealth: null,
       workerStatus: null,
       error:
         error instanceof Error
@@ -101,6 +111,20 @@ export default async function Home() {
               {snapshot.health
                 ? `Last checked ${formatTimestamp(snapshot.health.timestampUtc)} UTC`
                 : snapshot.error}
+            </p>
+          </article>
+
+          <article className={styles.card}>
+            <span className={styles.label}>Database</span>
+            <strong className={styles.value}>
+              {snapshot.databaseHealth
+                ? snapshot.databaseHealth.status
+                : "offline"}
+            </strong>
+            <p className={styles.meta}>
+              {snapshot.databaseHealth
+                ? snapshot.databaseHealth.detail
+                : "Supabase connection is not reachable."}
             </p>
           </article>
 

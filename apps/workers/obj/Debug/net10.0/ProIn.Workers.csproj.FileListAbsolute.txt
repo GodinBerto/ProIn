@@ -48,3 +48,4 @@ E:\Projects\MonoRepo Applications\ProIn\apps\workers\obj\Debug\net10.0\refint\Pr
 E:\Projects\MonoRepo Applications\ProIn\apps\workers\obj\Debug\net10.0\ProIn.Workers.pdb
 E:\Projects\MonoRepo Applications\ProIn\apps\workers\obj\Debug\net10.0\ProIn.Workers.genruntimeconfig.cache
 E:\Projects\MonoRepo Applications\ProIn\apps\workers\obj\Debug\net10.0\ref\ProIn.Workers.dll
+E:\Projects\MonoRepo Applications\ProIn\apps\workers\obj\Debug\net10.0\ProIn.Workers.sourcelink.json
