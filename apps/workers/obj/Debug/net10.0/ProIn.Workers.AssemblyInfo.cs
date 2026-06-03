@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProIn.Workers")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b3d71d5b4ed7c160aa61ebe76feab3ce483bd352")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a7955f0c2f6cc2274fef4eaffb784c96fdd634c")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProIn.Workers")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProIn.Workers")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

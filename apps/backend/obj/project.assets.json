@@ -126,6 +126,19 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "ProIn.Database/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Npgsql": "10.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ProIn.Database.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ProIn.Database.dll": {}
+        }
       }
     }
   },
@@ -521,12 +534,18 @@
         "swashbuckle.aspnetcore.swaggerui.10.2.1.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "ProIn.Database/1.0.0": {
+      "type": "project",
+      "path": "../../packages/database/ProIn.Database.csproj",
+      "msbuildProject": "../../packages/database/ProIn.Database.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
       "Microsoft.AspNetCore.OpenApi >= 10.0.8",
       "Npgsql >= 10.0.0",
+      "ProIn.Database >= 1.0.0",
       "Swashbuckle.AspNetCore >= 10.2.1"
     ]
   },
@@ -536,11 +555,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Projects\\MonoRepo Applications\\ProIn\\apps\\backend\\ProIn.Backend.csproj",
+      "projectUniqueName": "e:\\Projects\\MonoRepo Applications\\ProIn\\apps\\backend\\ProIn.Backend.csproj",
       "projectName": "ProIn.Backend",
-      "projectPath": "E:\\Projects\\MonoRepo Applications\\ProIn\\apps\\backend\\ProIn.Backend.csproj",
+      "projectPath": "e:\\Projects\\MonoRepo Applications\\ProIn\\apps\\backend\\ProIn.Backend.csproj",
       "packagesPath": "C:\\Users\\godfr\\.nuget\\packages\\",
-      "outputPath": "E:\\Projects\\MonoRepo Applications\\ProIn\\apps\\backend\\obj\\",
+      "outputPath": "e:\\Projects\\MonoRepo Applications\\ProIn\\apps\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\godfr\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -554,7 +573,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "e:\\Projects\\MonoRepo Applications\\ProIn\\packages\\database\\ProIn.Database.csproj": {
+              "projectPath": "e:\\Projects\\MonoRepo Applications\\ProIn\\packages\\database\\ProIn.Database.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

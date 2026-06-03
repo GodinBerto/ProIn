@@ -1,4 +1,4 @@
-namespace ProIn.Backend;
+namespace ProIn.Database;
 
 public sealed record DatabaseColumn(
     string Name,

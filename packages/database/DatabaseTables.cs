@@ -1,4 +1,4 @@
-namespace ProIn.Backend;
+namespace ProIn.Database;
 
 public static class DatabaseTables
 {

@@ -55,3 +55,5 @@ C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\ProI
 C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\ProIn.Backend.runtimeconfig.json
 C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\ProIn.Backend.dll
 C:\Users\godfr\AppData\Local\Temp\proin-backend-database-controllers-output\ProIn.Backend.pdb
+E:\Projects\MonoRepo Applications\ProIn\apps\backend\bin\Debug\net10.0\ProIn.Database.dll
+E:\Projects\MonoRepo Applications\ProIn\apps\backend\bin\Debug\net10.0\ProIn.Database.pdb

@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": "10.0.8",
           "Npgsql": "10.0.0",
+          "ProIn.Database": "1.0.0",
           "Swashbuckle.AspNetCore": "10.2.1"
         },
         "runtime": {
@@ -79,6 +80,17 @@
             "fileVersion": "10.2.1.2634"
           }
         }
+      },
+      "ProIn.Database/1.0.0": {
+        "dependencies": {
+          "Npgsql": "10.0.0"
+        },
+        "runtime": {
+          "ProIn.Database.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -136,6 +148,11 @@
       "sha512": "sha512-vzB8ZAGqXus3fdareJ9GHctaRP9ZL+wW9x8U7s1Y+BWprInFvSg6rpD9VhANNpwXA8fUHqu5Agjl/+hHG1BCQA==",
       "path": "swashbuckle.aspnetcore.swaggerui/10.2.1",
       "hashPath": "swashbuckle.aspnetcore.swaggerui.10.2.1.nupkg.sha512"
+    },
+    "ProIn.Database/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

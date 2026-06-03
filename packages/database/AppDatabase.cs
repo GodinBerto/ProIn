@@ -1,6 +1,7 @@
-namespace ProIn.Backend;
+namespace ProIn.Database;
 
 using Npgsql;
+using Microsoft.Extensions.Configuration;
 
 public sealed class AppDatabase(IConfiguration configuration)
 {
