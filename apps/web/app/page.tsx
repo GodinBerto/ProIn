@@ -1,102 +1,152 @@
-import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
 
-type Props = Omit<ImageProps, "src"> & {
-  srcLight: string;
-  srcDark: string;
+type HealthResponse = {
+  status: string;
+  timestampUtc: string;
 };
 
-const ThemeImage = (props: Props) => {
-  const { srcLight, srcDark, ...rest } = props;
-
-  return (
-    <>
-      <Image {...rest} src={srcLight} className="imgLight" />
-      <Image {...rest} src={srcDark} className="imgDark" />
-    </>
-  );
+type WorkerStatusItem = {
+  workerName: string;
+  lastSeenUtc: string;
+  heartbeatCount: number;
+  isHealthy: boolean;
 };
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <ThemeImage
-          className={styles.logo}
-          srcLight="turborepo-dark.svg"
-          srcDark="turborepo-light.svg"
-          alt="Turborepo logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>apps/web/app/page.tsx</code>
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+type WorkerStatusResponse = {
+  generatedAtUtc: string;
+  workers: WorkerStatusItem[];
+};
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new/clone?demo-description=Learn+to+implement+a+monorepo+with+a+two+Next.js+sites+that+has+installed+three+local+packages.&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F4K8ZISWAzJ8X1504ca0zmC%2F0b21a1c6246add355e55816278ef54bc%2FBasic.png&demo-title=Monorepo+with+Turborepo&demo-url=https%3A%2F%2Fexamples-basic-web.vercel.sh%2F&from=templates&project-name=Monorepo+with+Turborepo&repository-name=monorepo-turborepo&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fturborepo%2Ftree%2Fmain%2Fexamples%2Fbasic&root-directory=apps%2Fdocs&skippable-integrations=1&teamSlug=vercel&utm_source=create-turbo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://turborepo.dev/docs?utm_source"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+type BackendSnapshot = {
+  apiBaseUrl: string;
+  health: HealthResponse | null;
+  workerStatus: WorkerStatusResponse | null;
+  error: string | null;
+};
+
+const backendBaseUrl =
+  process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:5236";
+
+async function fetchJson<T>(path: string): Promise<T> {
+  const response = await fetch(`${backendBaseUrl}${path}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+
+  return response.json() as Promise<T>;
+}
+
+async function loadBackendSnapshot(): Promise<BackendSnapshot> {
+  try {
+    const [health, workerStatus] = await Promise.all([
+      fetchJson<HealthResponse>("/api/health"),
+      fetchJson<WorkerStatusResponse>("/api/workers/status"),
+    ]);
+
+    return {
+      apiBaseUrl: backendBaseUrl,
+      health,
+      workerStatus,
+      error: null,
+    };
+  } catch (error) {
+    return {
+      apiBaseUrl: backendBaseUrl,
+      health: null,
+      workerStatus: null,
+      error:
+        error instanceof Error
+          ? error.message
+          : "Backend is not reachable right now.",
+    };
+  }
+}
+
+function formatTimestamp(timestampUtc: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+    timeStyle: "medium",
+    timeZone: "UTC",
+  }).format(new Date(timestampUtc));
+}
+
+export default async function Home() {
+  const snapshot = await loadBackendSnapshot();
+  const activeWorkers =
+    snapshot.workerStatus?.workers.filter((worker) => worker.isHealthy) ?? [];
+
+  return (
+    <main className={styles.page}>
+      <section className={styles.shell}>
+        <div className={styles.hero}>
+          <p className={styles.kicker}>ProIn control plane</p>
+          <h1>Backend, workers, and frontend are now wired together.</h1>
+          <p className={styles.lede}>
+            The frontend reads live API status from{" "}
+            <code>{snapshot.apiBaseUrl}</code>, the backend tracks worker
+            heartbeats, and the worker service reports in on a schedule.
+          </p>
         </div>
-        <Button appName="web" className={styles.secondary}>
-          Open alert
-        </Button>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com/templates?search=turborepo&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://turborepo.dev?utm_source=create-turbo"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to turborepo.dev →
-        </a>
-      </footer>
-    </div>
+
+        <div className={styles.grid}>
+          <article className={styles.card}>
+            <span className={styles.label}>Backend</span>
+            <strong className={styles.value}>
+              {snapshot.health ? snapshot.health.status : "offline"}
+            </strong>
+            <p className={styles.meta}>
+              {snapshot.health
+                ? `Last checked ${formatTimestamp(snapshot.health.timestampUtc)} UTC`
+                : snapshot.error}
+            </p>
+          </article>
+
+          <article className={styles.card}>
+            <span className={styles.label}>Workers</span>
+            <strong className={styles.value}>
+              {snapshot.workerStatus?.workers.length ?? 0} registered
+            </strong>
+            <p className={styles.meta}>
+              {activeWorkers.length} currently healthy
+            </p>
+          </article>
+
+          <article className={`${styles.card} ${styles.spanTwo}`}>
+            <span className={styles.label}>Heartbeat feed</span>
+            {snapshot.workerStatus ? (
+              <ul className={styles.list}>
+                {snapshot.workerStatus.workers.map((worker) => (
+                  <li key={worker.workerName} className={styles.listItem}>
+                    <div>
+                      <strong>{worker.workerName}</strong>
+                      <span>
+                        {worker.heartbeatCount} heartbeats, last seen{" "}
+                        {formatTimestamp(worker.lastSeenUtc)} UTC
+                      </span>
+                    </div>
+                    <span
+                      className={`${styles.statusPill} ${
+                        worker.isHealthy
+                          ? styles.statusHealthy
+                          : styles.statusStale
+                      }`}
+                    >
+                      {worker.isHealthy ? "healthy" : "stale"}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className={styles.meta}>
+                Start the backend and workers to see live heartbeats here.
+              </p>
+            )}
+          </article>
+        </div>
+      </section>
+    </main>
   );
 }

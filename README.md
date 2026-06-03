@@ -18,6 +18,8 @@ This Turborepo includes the following packages/apps:
 
 - `docs`: a [Next.js](https://nextjs.org/) app
 - `web`: another [Next.js](https://nextjs.org/) app
+- `backend`: an ASP.NET Core Web API for the ProIn services
+- `workers`: a .NET background worker service that reports heartbeats to the backend
 - `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
@@ -26,7 +28,7 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 ### Utilities
 
-This Turborepo has some additional tools already setup for you:
+This Turborepo has some additional tools already set up for you:
 
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [ESLint](https://eslint.org/) for code linting
@@ -87,6 +89,16 @@ npx turbo dev
 pnpm exec turbo dev
 pnpm exec turbo dev
 ```
+
+This now starts the frontend, backend, and worker service together through their workspace `dev` scripts.
+
+### Backend Stack
+
+- Backend API: `apps/backend`
+- Worker service: `apps/workers`
+- Frontend dashboard: `apps/web`
+
+The frontend reads the backend URL from `NEXT_PUBLIC_BACKEND_URL` and defaults to `http://localhost:5236`.
 
 You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
 

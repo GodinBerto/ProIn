@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/apps/" />
+  <Folder Name="/apps/backend/">
+    <Project Path="apps/backend/ProIn.Backend.csproj" />
+  </Folder>
+  <Folder Name="/apps/workers/">
+    <Project Path="apps/workers/ProIn.Workers.csproj" />
+  </Folder>
+</Solution>

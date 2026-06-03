@@ -1,0 +1,8 @@
+{
+  "name": "proin-workers",
+  "private": true,
+  "scripts": {
+    "dev": "dotnet watch --project ProIn.Workers.csproj run",
+    "build": "dotnet build ProIn.Workers.csproj"
+  }
+}
