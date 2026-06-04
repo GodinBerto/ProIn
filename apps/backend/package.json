@@ -1,10 +1,9 @@
 {
-  "name": "@proin/backend",
-  "version": "1.0.0",
+  "name": "backend",
   "private": true,
   "scripts": {
-    "dev": ".\\.venv\\Scripts\\python.exe manage.py runserver 5236",
-    "build": "echo 'No build required for Django'",
-    "start": ".\\.venv\\Scripts\\python.exe manage.py runserver 5236"
+    "dev": "python manage.py runserver",
+    "migrate": "python manage.py migrate",
+    "makemigrations": "python manage.py makemigrations"
   }
 }
