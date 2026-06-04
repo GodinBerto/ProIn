@@ -50,3 +50,17 @@ class DatabaseHealthResponse(Schema):
     status: str
     timestampUtc: datetime
     detail: str
+
+class WorkerHeartbeatPayload(Schema):
+    WorkerName: Optional[str] = None
+    workerName: Optional[str] = None
+
+class WorkerStatusItem(Schema):
+    workerName: str
+    lastSeenUtc: datetime
+    heartbeatCount: int
+    isHealthy: bool
+
+class WorkerStatusResponse(Schema):
+    generatedAtUtc: datetime
+    workers: list[WorkerStatusItem]

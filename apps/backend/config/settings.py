@@ -11,15 +11,22 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
-import dj_database_url
-from dotenv import load_dotenv
 
-load_dotenv()
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+MONOREPO_ROOT = BASE_DIR.parent.parent
+
+if str(MONOREPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(MONOREPO_ROOT))
+
+from packages.database import build_django_databases
+
+load_dotenv(BASE_DIR / ".env")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-%8!@m44*lzbvyq0)a9!ri!slu*y(4d#j7m_5g(kq7p-&)!nfzh'
@@ -80,12 +87,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@127.0.0.1:54322/postgres',
-        conn_max_age=600
-    )
-}
+DATABASES = build_django_databases(
+    default_url='postgresql://postgres:postgres@127.0.0.1:54322/postgres',
+    supabase_pooler_url_path=MONOREPO_ROOT / 'supabase' / '.temp' / 'pooler-url',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -129,10 +134,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Supabase Auth configuration
-SUPABASE_URL = os.getenv('SUPABASE_URL', 'http://127.0.0.1:5236')
+SUPABASE_URL = os.getenv('SUPABASE_URL', 'https://fuhtqtfgvlbfghtbwhmo.supabase.co')
 SUPABASE_ANON_KEY = os.getenv('SUPABASE_ANON_KEY', '')
 JWT_SECRET = os.getenv('JWT_SECRET', '')
-JWT_ISSUER = os.getenv('JWT_ISSUER', 'http://127.0.0.1:5236/auth/v1')
+JWT_ISSUER = os.getenv('JWT_ISSUER', 'https://fuhtqtfgvlbfghtbwhmo.supabase.co/auth/v1')
+
+BACKEND_URL = os.getenv('BACKEND_URL', 'http://127.0.0.1:5236')
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),

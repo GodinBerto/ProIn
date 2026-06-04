@@ -1,6 +1,10 @@
 # Database
 
-The CSV exports in this folder have been converted into the Supabase migration at:
+This package is the Python/Django version of the old C# database helper. It
+defines the shared table metadata used by the Django backend and points at the
+Supabase migration that creates the actual Postgres schema.
+
+The CSV exports were converted into the Supabase migration at:
 
 ```text
 ../../supabase/migrations/20260603014500_create_app_tables_from_csv.sql
@@ -25,9 +29,16 @@ supabase link --project-ref YOUR_PROJECT_REF
 supabase db push
 ```
 
-Then set the backend database connection string:
+Then set the backend database connection string with either `DATABASE_URL`:
 
 ```powershell
-$env:ConnectionStrings__DefaultConnection="Host=YOUR_HOST;Port=5432;Database=postgres;Username=postgres;Password=YOUR_PASSWORD;Ssl Mode=Require;Trust Server Certificate=true"
+$env:DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@YOUR_HOST:5432/postgres?sslmode=require"
+pnpm --dir apps/backend dev
+```
+
+The Django backend also supports the previous .NET-style environment variable:
+
+```powershell
+$env:ConnectionStrings__DefaultConnection="Host=YOUR_HOST;Port=5432;Database=postgres;Username=postgres;Password=YOUR_PASSWORD;Ssl Mode=Require"
 pnpm --dir apps/backend dev
 ```
