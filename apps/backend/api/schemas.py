@@ -7,6 +7,10 @@ from .models import (
     Document, DocumentShare, Message
 )
 
+class AuthPayload(Schema):
+    email: str
+    password: str
+
 class ProfileSchema(ModelSchema):
     class Meta:
         model = Profile
