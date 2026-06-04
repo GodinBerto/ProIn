@@ -1,8 +1,9 @@
 {
-  "name": "proin-workers",
+  "name": "@proin/workers",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "dotnet watch --project ProIn.Workers.csproj run",
-    "build": "dotnet build ProIn.Workers.csproj"
+    "dev": "cd ../backend && .\\.venv\\Scripts\\python.exe manage.py run_worker",
+    "start": "cd ../backend && .\\.venv\\Scripts\\python.exe manage.py run_worker"
   }
 }
