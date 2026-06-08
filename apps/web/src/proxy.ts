@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // Allow known routes
-const validRoutes = ["/", "/dashboard", "/products", "/login", "/register"];
+const validRoutes = [
+  "/",
+  "/dashboard",
+  "/products",
+  "/login",
+  "/register",
+  "/api",
+];
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;

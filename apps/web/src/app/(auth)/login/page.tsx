@@ -12,7 +12,7 @@ import {
 } from "@repo/ui";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 export default function LoginPage() {
@@ -21,76 +21,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [googleBusy, setGoogleBusy] = useState(false);
-
-  // if (session) {
-  //   void redirect({ to: "/dashboard" });
-  //   navigate({ to: "/dashboard" });
-  // }
-
-  // async function handlePassword(e: FormEvent, mode: "in" | "up") {
-  //   e.preventDefault();
-  //   setBusy(true);
-  //   try {
-  //     const fn =
-  //       mode === "in"
-  //         ? supabase.auth.signInWithPassword({ email, password })
-  //         : supabase.auth.signUp({
-  //             email,
-  //             password,
-  //             options: {
-  //               emailRedirectTo: window.location.origin + "/dashboard",
-  //             },
-  //           });
-  //     const { error } = await fn;
-  //     if (error) throw error;
-  //     toast.success(mode === "in" ? "Welcome back" : "Account created");
-  //     navigate({ to: "/dashboard" });
-  //   } catch (err) {
-  //     toast.error(err instanceof Error ? err.message : "Authentication failed");
-  //   } finally {
-  //     setBusy(false);
-  //   }
-  // }
-
-  // async function handleMagic(e: FormEvent) {
-  //   e.preventDefault();
-  //   setBusy(true);
-  //   try {
-  //     const { error } = await supabase.auth.signInWithOtp({
-  //       email,
-  //       options: { emailRedirectTo: window.location.origin + "/dashboard" },
-  //     });
-  //     if (error) throw error;
-  //     toast.success("Check your email for the magic link");
-  //   } catch (err) {
-  //     toast.error(err instanceof Error ? err.message : "Failed");
-  //   } finally {
-  //     setBusy(false);
-  //   }
-  // }
-
-  // async function handleGoogle() {
-  //   setGoogleBusy(true);
-  //   try {
-  //     const result = await lovable.auth.signInWithOAuth("google", {
-  //       redirect_uri: window.location.origin + "/dashboard",
-  //     });
-  //     if (result.error) {
-  //       toast.error(
-  //         result.error instanceof Error
-  //           ? result.error.message
-  //           : "Google sign-in failed",
-  //       );
-  //       return;
-  //     }
-  //     if (result.redirected) return;
-  //     navigate({ to: "/dashboard" });
-  //   } catch (err) {
-  //     toast.error(err instanceof Error ? err.message : "Google sign-in failed");
-  //   } finally {
-  //     setGoogleBusy(false);
-  //   }
-  // }
 
   return (
     <div className="grid min-h-screen md:grid-cols-2">
@@ -135,7 +65,9 @@ export default function LoginPage() {
             variant="outline"
             disabled={googleBusy}
             className="mt-6 w-full flex gap-4 items-center px-6 py-3 hover:bg-primary hover:text-white"
-            onClick={() => {}}
+            onClick={() => {
+              signIn("google");
+            }}
           >
             {googleBusy ? (
               <Loader2 className="mr-2 size-4 animate-spin" />
