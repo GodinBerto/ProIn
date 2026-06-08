@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from ninja import Router
+from ninja import Router, HttpError
 
 import requests
 from django.conf import settings
@@ -52,10 +52,10 @@ def auth_google(request, payload: GoogleAuthPayload):
 def get_user(request):
     user_id = request.auth.get("sub")
     if not user_id:
-        return JsonResponse({"detail": "Invalid token"}, status=401)
+        raise HttpError(401, "Invalid token")
 
     profile = Profile.objects.filter(id=user_id).first()
     if profile is None:
-        return JsonResponse({"detail": "User not found"}, status=404)
+        raise HttpError(404, "User not found")
 
     return profile
