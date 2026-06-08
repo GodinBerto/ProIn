@@ -5,46 +5,18 @@ import {
   Button,
   Check,
   FileText,
-  Logo,
   Shield,
   Sparkles,
   Zap,
 } from "@repo/ui";
 import Link from "next/link";
+import Header from "../components/header";
+import Footer from "../components/footer";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-semibold tracking-tight"
-          >
-            <Logo />
-            <span>FlowForm</span>
-          </Link>
-          <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
-            <a href="#features" className="hover:text-foreground">
-              Features
-            </a>
-            <a href="#pricing" className="hover:text-foreground">
-              Pricing
-            </a>
-          </nav>
-          <div className="flex items-center gap-2">
-            <Link
-              href="/login"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground"
-            >
-              Sign in
-            </Link>
-            <Link href="/login">
-              <Button className="p-2 rounded-md">Get started</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main>
         {/* Hero */}
@@ -66,7 +38,7 @@ export default function Home() {
               or download. No design skills required.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link href="/login">
+              <Link href="http://localhost:3005/login">
                 <Button
                   size="lg"
                   className="shadow-(--shadow-primary) px-6 py-3"
@@ -88,7 +60,7 @@ export default function Home() {
 
           {/* Preview card */}
           <div className="mx-auto -mt-4 max-w-5xl px-6 pb-20">
-            <div className="rounded-2xl border border-border bg-surface p-2 shadow-[var(--shadow-elev)]">
+            <div className="rounded-2xl border border-border bg-surface p-2 shadow-(--shadow-elev)">
               <div className="rounded-xl bg-background p-8 md:p-12">
                 <div className="grid gap-8 md:grid-cols-2">
                   <div>
@@ -209,7 +181,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/login" className="mt-8 block">
+                <Link href="http://localhost:3005/login" className="mt-8 block">
                   <Button
                     variant="outline"
                     className="w-full px-6 py-3 hover:bg-primary hover:text-primary-foreground duration-200 transition-colors"
@@ -245,7 +217,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/login" className="mt-8 block">
+                <Link href="http://localhost:3005/login" className="mt-8 block">
                   <Button className="w-full px-6 py-3">Start free trial</Button>
                 </Link>
               </div>
@@ -254,15 +226,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <Logo size={20} />
-            <span>FlowForm</span>
-          </div>
-          <div>© {new Date().getFullYear()} FlowForm</div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
