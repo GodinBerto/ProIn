@@ -65,8 +65,15 @@ export default function LoginPage() {
             variant="outline"
             disabled={googleBusy}
             className="mt-6 w-full flex gap-4 items-center px-6 py-3 hover:bg-primary hover:text-white"
-            onClick={() => {
-              signIn("google");
+            onClick={async () => {
+              try {
+                setGoogleBusy(true);
+                await signIn("google", {
+                  callbackUrl: "/",
+                });
+              } finally {
+                setGoogleBusy(false);
+              }
             }}
           >
             {googleBusy ? (
