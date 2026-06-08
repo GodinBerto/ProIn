@@ -54,3 +54,4 @@ export { Shield } from "lucide-react";
 export { FileText } from "lucide-react";
 export { Check } from "lucide-react";
 export { ArrowRight } from "lucide-react";
+export { Loader2 } from "lucide-react";
