@@ -69,7 +69,7 @@ export default function LoginPage() {
               try {
                 setGoogleBusy(true);
                 await signIn("google", {
-                  callbackUrl: "/",
+                  callbackUrl: "/dashboard",
                 });
               } finally {
                 setGoogleBusy(false);

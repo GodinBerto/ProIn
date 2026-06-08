@@ -11,6 +11,12 @@ class AuthPayload(Schema):
     email: str
     password: str
 
+class GoogleAuthPayload(Schema):
+    email: str
+    full_name: Optional[str] = None
+    avatar_url: Optional[str] = None
+    id_token: Optional[str] = None
+
 class ProfileSchema(ModelSchema):
     class Meta:
         model = Profile

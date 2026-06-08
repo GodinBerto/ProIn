@@ -136,6 +136,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Supabase Auth configuration
 SUPABASE_URL = os.getenv('SUPABASE_URL', 'https://fuhtqtfgvlbfghtbwhmo.supabase.co')
 SUPABASE_ANON_KEY = os.getenv('SUPABASE_ANON_KEY', '')
+SUPABASE_SERVICE_ROLE_KEY = os.getenv('SUPABASE_SERVICE_ROLE_KEY', '')
 JWT_SECRET = os.getenv('JWT_SECRET', '')
 JWT_ISSUER = os.getenv('JWT_ISSUER', 'https://fuhtqtfgvlbfghtbwhmo.supabase.co/auth/v1')
 
