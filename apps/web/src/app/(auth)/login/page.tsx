@@ -1,5 +1,7 @@
 "use client";
 import {
+  Alert,
+  AlertDescription,
   Button,
   Input,
   Label,
@@ -10,17 +12,89 @@ import {
   TabsList,
   TabsTrigger,
 } from "@repo/ui";
+import { registerUser, sendMagicLink } from "@/lib/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 export default function LoginPage() {
-  const navigate = useRouter();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [googleBusy, setGoogleBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  async function handlePasswordSignIn(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError(null);
+    setSuccess(null);
+    setBusy(true);
+
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError(result.error);
+        return;
+      }
+
+      router.push("/dashboard");
+    } catch {
+      setError("Failed to sign in. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleCreateAccount() {
+    setError(null);
+    setSuccess(null);
+    setBusy(true);
+
+    try {
+      const data = await registerUser(email, password);
+      const result = await signIn("credentials", {
+        accessToken: data.access_token,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError(result.error);
+        return;
+      }
+
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to create account.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleMagicLink(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError(null);
+    setSuccess(null);
+    setBusy(true);
+
+    try {
+      const data = await sendMagicLink(email);
+      setSuccess(data.message);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to send magic link.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
 
   return (
     <div className="grid min-h-screen md:grid-cols-2">
@@ -59,6 +133,18 @@ export default function LoginPage() {
           <p className="mt-1 text-sm text-muted-foreground">
             Welcome back. Sign in to continue.
           </p>
+
+          {error ? (
+            <Alert variant="destructive" className="mt-4">
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          ) : null}
+
+          {success ? (
+            <Alert className="mt-4">
+              <AlertDescription>{success}</AlertDescription>
+            </Alert>
+          ) : null}
 
           <Button
             type="button"
@@ -117,7 +203,7 @@ export default function LoginPage() {
             </TabsList>
 
             <TabsContent value="password">
-              <form onSubmit={(e) => {}} className="mt-6 space-y-4">
+              <form onSubmit={handlePasswordSignIn} className="mt-6 space-y-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -150,7 +236,7 @@ export default function LoginPage() {
                   variant="outline"
                   disabled={busy}
                   className="w-full"
-                  onClick={(e) => {}}
+                  onClick={handleCreateAccount}
                 >
                   Create account
                 </Button>
@@ -158,7 +244,7 @@ export default function LoginPage() {
             </TabsContent>
 
             <TabsContent value="magic">
-              <form onSubmit={() => {}} className="mt-6 space-y-4">
+              <form onSubmit={handleMagicLink} className="mt-6 space-y-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="email2">Email</Label>
                   <Input

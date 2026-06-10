@@ -141,6 +141,7 @@ JWT_SECRET = os.getenv('JWT_SECRET', '')
 JWT_ISSUER = os.getenv('JWT_ISSUER', 'https://fuhtqtfgvlbfghtbwhmo.supabase.co/auth/v1')
 
 BACKEND_URL = os.getenv('BACKEND_URL', 'http://127.0.0.1:5236')
+WEB_APP_URL = os.getenv('WEB_APP_URL', 'http://127.0.0.1:3005')
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),

@@ -11,6 +11,13 @@ class AuthPayload(Schema):
     email: str
     password: str
 
+class MagicLinkPayload(Schema):
+    email: str
+    redirect_to: Optional[str] = None
+
+class SessionPayload(Schema):
+    access_token: str
+
 class GoogleAuthPayload(Schema):
     email: str
     full_name: Optional[str] = None

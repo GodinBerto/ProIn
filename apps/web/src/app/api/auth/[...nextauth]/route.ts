@@ -1,5 +1,12 @@
 import { authOptions as baseAuthOptions } from "@repo/auth";
 import NextAuth, { type NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+
+import {
+  loginUser,
+  syncAuthSession,
+  type AuthResponse,
+} from "@/lib/api";
 
 const backendUrl = process.env.BACKEND_URL ?? "http://127.0.0.1:5236";
 
@@ -45,8 +52,50 @@ async function syncGoogleUserWithBackend(
   return response.json();
 }
 
+function toCredentialsUser(data: AuthResponse) {
+  return {
+    id: data.user.id,
+    email: data.user.email,
+    name: data.user.full_name ?? data.user.email,
+    image: data.user.avatar_url ?? null,
+    accessToken: data.access_token,
+    isNewUser: data.is_new_user,
+  };
+}
+
 const authOptions: NextAuthOptions = {
   ...baseAuthOptions,
+  providers: [
+    ...baseAuthOptions.providers,
+    CredentialsProvider({
+      id: "credentials",
+      name: "Email",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+        accessToken: { label: "Access Token", type: "text" },
+      },
+      async authorize(credentials) {
+        try {
+          if (credentials?.accessToken) {
+            const data = await syncAuthSession(credentials.accessToken);
+            return toCredentialsUser(data);
+          }
+
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error("Email and password are required.");
+          }
+
+          const data = await loginUser(credentials.email, credentials.password);
+          return toCredentialsUser(data);
+        } catch (error) {
+          throw new Error(
+            error instanceof Error ? error.message : "Authentication failed.",
+          );
+        }
+      },
+    }),
+  ],
   pages: {
     signIn: "/login",
   },
@@ -71,7 +120,7 @@ const authOptions: NextAuthOptions = {
         return false;
       }
     },
-    async jwt({ token, account, profile }) {
+    async jwt({ token, account, profile, user }) {
       if (account?.provider === "google" && profile?.email) {
         const data = googleAuthByEmail.get(profile.email);
         googleAuthByEmail.delete(profile.email);
@@ -81,6 +130,12 @@ const authOptions: NextAuthOptions = {
           token.accessToken = data.access_token;
           token.isNewUser = data.is_new_user;
         }
+      }
+
+      if (account?.provider === "credentials" && user) {
+        token.sub = user.id;
+        token.accessToken = user.accessToken as string | undefined;
+        token.isNewUser = user.isNewUser as boolean | undefined;
       }
 
       return token;

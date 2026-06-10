@@ -7,6 +7,7 @@ const validRoutes = [
   "/products",
   "/login",
   "/register",
+  "/auth",
   "/api",
 ];
 

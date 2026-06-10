@@ -11,6 +11,11 @@ declare module "next-auth" {
       image?: string | null;
     };
   }
+
+  interface User {
+    accessToken?: string;
+    isNewUser?: boolean;
+  }
 }
 
 declare module "next-auth/jwt" {
